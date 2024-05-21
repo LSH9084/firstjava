@@ -17,6 +17,8 @@ public class ClassObject {
 		System.out.println(B==C);
 		System.out.println(A.equals(B));
 		obj1.setName("홍길동");
+		obj1.setAge(17);
+		obj1.setGrade(100);
 		System.out.println(obj1);
 		
 	}
@@ -28,4 +30,6 @@ public class ClassObject {
 @ToString
 class MyObject {
 	String name ;
+	int age;
+	int grade;
 }
