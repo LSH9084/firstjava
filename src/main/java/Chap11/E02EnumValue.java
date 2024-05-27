@@ -16,7 +16,8 @@ public class E02EnumValue {
 		case SATURDAY -> System.out.println("토요일");
 		default -> System.out.println("잘못 입력");
 		}
-		System.out.println(toDay);
+		
+//		System.out.println(toDay);
 		
 	}
 }

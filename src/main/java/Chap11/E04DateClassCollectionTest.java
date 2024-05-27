@@ -73,7 +73,7 @@ public class E04DateClassCollectionTest {
 		LocalTime time3 = LocalTime.now(ZoneId.of("Asia/Colombo"));
 		System.out.println(time3);
 		
-		ZoneId.getAvailableZoneIds().stream().forEach(System.out::println);
+//		ZoneId.getAvailableZoneIds().stream().forEach(System.out::println);
 		
 		LocalDateTime time4 = LocalDateTime.now();
 		System.out.println(time4);

@@ -14,7 +14,7 @@ public class E03StringMethod {
 		
 		System.out.println(str.length());
 		System.out.println("인덱스 번호로 문자찾기:"+str.charAt(6));
-		System.out.println("문자로 번호찾기:"+str.indexOf(" "));
+		System.out.println("문자로 인덱스번호찾기:"+str.indexOf(" "));
 		System.out.println("replace:"+str.replace("Hello","Hi"));
 		System.out.println("substring:"+str.substring(1,13));
 		System.out.println("trim():" +str.trim().length() +"앞에는 공백미포함 뒤에는 공백포함"+str.length());
