@@ -29,7 +29,7 @@ class Emplyee implements Comparable<Emplyee> {
 	private String name;
 	@Override
 	public int compareTo(Emplyee o) {
-		//return this.sabun - o.sabun;
-		return this.name.compareTo(o.name);
+		return this.sabun - o.sabun;
+//		return this.name.compareTo(o.name);
 	}
 }

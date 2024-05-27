@@ -19,12 +19,6 @@ public class ListLinked {
 			System.out.println("linked size : "+list2.size());
 			System.out.println("array size : "+list1.size());
 			
-			
-			
-			
-			
-			
-			
 		}
 		
 		public static void toString(String title) {

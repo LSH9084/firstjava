@@ -11,7 +11,6 @@ public class ListCollection {
 		list.add("동길이");
 		list.add("동순이");
 		list.add("동길이홍");
-		list.add("동길이홍");
 		
 		System.out.println(list);
 		list.forEach((v)->{
@@ -29,6 +28,10 @@ public class ListCollection {
 		System.out.println("--수정: set(index, data)");
 		
 		list.set(3, "하하");
+		System.out.println("===========sdjkfsdlkjf");
+		for(int i=0; i<list.size();i++) {
+			list.get(i);
+		}
 		list.forEach(System.out::println);
 		System.out.println("====특정 위치 값 추출==========");
 		System.out.println(list.get(5));
@@ -36,7 +39,7 @@ public class ListCollection {
 		System.out.println("=====사이즈찾기 = 이름.size()====");
 		System.out.println(list.size());
 		
-		System.out.println("====특정 값에 대한 indexOf()");
+		System.out.println("====특정 값에 대한 indexOf()====");
 		System.out.println(list.indexOf("하하"));
 		System.out.println(list.indexOf("하하001"));
 		
@@ -47,6 +50,7 @@ public class ListCollection {
 		list.remove(list.indexOf("하하"));
 		System.out.println("===");
 		list.forEach(System.out::println);
+		
 		
 		System.out.println("===");
 		List<String> delList = new ArrayList<String>();

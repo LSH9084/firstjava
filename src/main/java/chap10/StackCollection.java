@@ -20,6 +20,7 @@ public class StackCollection {
 		System.out.println(stack.isEmpty());
 		stack.pop();
 		stack.pop();
+		System.out.println(stack+"====");
 		stack.add(2,"ddd");
 		stack.remove(1);
 		stack.size();
@@ -28,7 +29,7 @@ public class StackCollection {
 			stack.pop();
 			System.out.println(stack);
 		}
-		while(stack.size()==(int)3) {
+		while(stack.size()<(int)3) {
 			stack.push("111");
 			System.out.println(stack);
 		}
