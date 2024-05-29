@@ -32,8 +32,6 @@ public class ShapeTester {
 							int height = sc.nextInt();
 							p[i] = new Rectangle(width, height);
 							break;
-							
-				
 			}
 		}
 		for(Shape s : p ) {
