@@ -14,7 +14,7 @@ public class E05CollectMethod06 {
 //		System.out.println(strm1);
 		
 		strm1.forEach(x->{
-//			System.out.println(Arrays.toString(x));
+			System.out.println(Arrays.toString(x));
 			for(String s : x) {
 				System.out.println(s);
 			}

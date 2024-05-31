@@ -52,7 +52,7 @@ public class E04CollectMethod05 {
 		int sum = Arrays.stream(num1).filter(x->x>=70).sum();
 		System.out.println(sum);
 		
-		int allSum = Arrays.stream(num1).map(x->x).sum();
+		int allSum = Arrays.stream(num1).sum();
 		System.out.println(allSum);
 		
 		

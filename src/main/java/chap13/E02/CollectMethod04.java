@@ -39,8 +39,8 @@ public class CollectMethod04 {
 		int sum1 = IntStream.range(1, 6).boxed().reduce(0, (x,y)->x+y);
 		System.out.println(sum1);
 		
-		int sum2 = IntStream.range(1, 6).boxed().reduce(0, Integer::sum);
-		System.out.println(sum2);
+		int sum2 = IntStream.range(1, 6).reduce(0, Integer::sum);
+		System.out.println(sum2+"==");
 		
 		Integer sum3 = IntStream.range(1, 6).skip(3).sum();
 		System.out.println(sum3);

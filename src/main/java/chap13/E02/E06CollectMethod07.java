@@ -64,6 +64,7 @@ public class E06CollectMethod07 {
 		list4.stream().filter(x -> 0 < x.toUpperCase().indexOf("ED")).forEach(System.out::println);
 		
 		Predicate<String> condition1 = x -> 0 < x.toUpperCase().indexOf("ED");
+		
 		list4.stream().filter(condition1).forEach(System.out::println);
 		
 		System.out.println("==포함 X==");
