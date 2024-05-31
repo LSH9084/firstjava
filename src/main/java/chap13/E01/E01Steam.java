@@ -30,7 +30,7 @@ public class E01Steam {
 		String[] str1 = {"홍길동","홍길순","동길이","동순이"};
 		System.out.println(Arrays.toString(str1));
 		
-		int [] num1 = {3,6,4,5,7};
+		int [] num1 = {3,6,4,5,7,7};
 		System.out.println(Arrays.toString(num1));
 		
 		double [] dou1 = {3.1,5.4,6.6,7.2};

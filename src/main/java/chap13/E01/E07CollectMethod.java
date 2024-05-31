@@ -59,13 +59,5 @@ public class E07CollectMethod {
 		 
 		 
 		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
 	}
 }

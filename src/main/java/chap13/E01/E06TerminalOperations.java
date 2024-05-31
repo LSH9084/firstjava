@@ -62,7 +62,7 @@ public class E06TerminalOperations {
 		System.out.println(op1.getAsInt());
 		
 		OptionalInt op2 = OptionalInt.empty();
-		op2 = OptionalInt.of(123);
+//		op2 = OptionalInt.of(123);
 		System.out.println("====");
 		if(op2.isEmpty()) {
 			System.out.println("비어있음.");

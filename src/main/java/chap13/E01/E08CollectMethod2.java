@@ -42,8 +42,9 @@ public class E08CollectMethod2 {
 		
 	}
 }
-@Data 
+@Data
 @RequiredArgsConstructor
+//@AllArgsConstructor
 class Score {
 	private final String name;
 	private final int kor;
