@@ -13,9 +13,7 @@ public class FileReaderEx {
 			while((i=fr1.read()) != -1) {
 				System.out.print((char)i);
 			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+		} catch (Exception e) {}
 		
 		finally {
 			try {

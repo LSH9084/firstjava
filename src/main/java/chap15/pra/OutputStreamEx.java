@@ -1,12 +1,15 @@
 package chap15.pra;
 
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 
 public class OutputStreamEx {
 	public static void main(String[] args) {
 		
 		try {
-			OutputStream out = System.out;
+//			OutputStream out = System.out;
+			Writer out = new OutputStreamWriter(System.out);
 			out.write('a');
 			out.write('b');
 			out.write('c');

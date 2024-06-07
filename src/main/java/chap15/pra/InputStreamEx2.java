@@ -10,10 +10,8 @@ public class InputStreamEx2 {
 			Reader in = new InputStreamReader(System.in);
 			int i = 0;
 			while ((i=in.read()) != -1) {
-				System.out.println((char)i);
+				System.out.print((char)i);
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+		} catch (Exception e) {	}
 	}
 }
