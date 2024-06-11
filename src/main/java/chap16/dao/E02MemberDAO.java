@@ -70,8 +70,8 @@ public class E02MemberDAO {
 		
 		try {
 			String sql = "select * from member";
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
 			
 			while( rs.next()) {
 				E03MemberVO vo = new E03MemberVO();
@@ -84,10 +84,32 @@ public class E02MemberDAO {
 			}
 			
 		} catch (Exception e) {}
-		
-		//System.out.println("query select result : "+list);
 		return list;
 	}
+	
+//	public List<E03MemberVO> list() {
+//		List<E03MemberVO> list = new ArrayList<E03MemberVO>();
+//		
+//		try {
+//			String sql = "select * from member";
+//			stmt = conn.createStatement();
+//			rs = stmt.executeQuery(sql);
+//			
+//			while( rs.next()) {
+//				E03MemberVO vo = new E03MemberVO();
+//				
+//				vo.setMemberno(rs.getInt("memberno"));
+//				vo.setId(rs.getString("id"));
+//				vo.setName(rs.getString("name"));
+//				
+//				list.add(vo);
+//			}
+//			
+//		} catch (Exception e) {}
+//		
+//		//System.out.println("query select result : "+list);
+//		return list;
+//	}
 	
 	public void close() {
 		if(conn != null) {
@@ -95,7 +117,7 @@ public class E02MemberDAO {
 				conn.close();
 			} catch (Exception e) {}
 		}
-		if(stmt != null) {
+		if(pstmt != null) {
 			try {
 				pstmt.close();
 			} catch (Exception e) {}
@@ -120,12 +142,32 @@ public class E02MemberDAO {
 	public int update(E03MemberVO vo) {
 		int result = 0;
 		try {
-			String sql = "UPDATE MEMBER SET id = '"+vo.getId()+"' , name= '"+ vo.getName()+"' "+"WHERE memberno = "+vo.getMemberno();
-			stmt = conn.createStatement();
-			result = stmt.executeUpdate(sql);
+			String sql = "UPDATE MEMBER SET id = ?, name = ? WHERE memberno = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getId());
+			pstmt.setString(2, vo.getName());
+			pstmt.setInt(3, vo.getMemberno());
+			result = pstmt.executeUpdate();
+
+			
 		} catch (Exception e) {}
-		
 		return result;
+	}
+		
+	public E03MemberVO selectOne(int memberno) {
+		E03MemberVO vo = new E03MemberVO();
+		try {
+			String sql = "SELECT * FROM member WHERE memberno = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberno);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				vo.setMemberno(rs.getInt("memberno"));
+				vo.setId(rs.getString("id"));
+				vo.setName(rs.getString("name"));
+			}
+		} catch (Exception e) {}
+		return vo;
 	}
 
 		

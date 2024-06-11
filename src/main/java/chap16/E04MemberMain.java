@@ -18,10 +18,14 @@ public class E04MemberMain {
 		
 		int rs = dao.insert(vo);
 		
+		
+		
 		if(rs>0) {
 			System.out.println("회원 정보 정상적으로 등록 되었습니다.");
 		}
 		System.out.println("result code : "+rs);
+		
+		
 		
 		E03MemberVO vo2 = new E03MemberVO();
 		vo2.setMemberno(3);
@@ -33,13 +37,36 @@ public class E04MemberMain {
 			System.out.println("회원 정보 정상적으로 등록 되었습니다.");
 		}
 		System.out.println(rs2);
+		
+		
+		
+	
+		
+//		int r3 = dao.delete(3);
+//		if(r3>0) {
+//			System.out.println("회원 삭제 성공");
+//		}
+		
+//		vo.setName("고길동");
+//		vo.setId("hongg");
+//		vo.setMemberno(2);
+		E03MemberVO vo3 = new E03MemberVO(3,"고창석","Goo");
+		
+		int rs4 = dao.update(vo3);
+		if(rs4>0) {
+			System.out.println("회원수정성공");
+		}
+		
 		List<E03MemberVO> list = dao.list();
 		list.stream().forEach(System.out::println);
+		E03MemberVO vo4 = new E03MemberVO();
+		vo4.setMemberno(2);
 		
-		int r3 = dao.delete(3);
-		if(r3>0) {
-			System.out.println("회원 삭제 성공");
-		}
+		E03MemberVO rvo = dao.selectOne(3);
+		System.out.println("회원정보 출력");
+		System.out.println("회원번호:"+rvo.getMemberno());
+		System.out.println("아이디:"+rvo.getId());
+		System.out.println("이름:"+rvo.getName());
 		
 		dao.close();
 	}
