@@ -18,7 +18,7 @@ public class E11UserTableModel extends AbstractTableModel {
 	@Override
 	public int getRowCount() {
 		//테이블의 행의 수를 지정
-		return data.length;
+		return data.length; //2차원 함수면 2차원의 길이만 3차원 함수면 3차원의 길이만을 판별한다.
 	}
 
 	@Override

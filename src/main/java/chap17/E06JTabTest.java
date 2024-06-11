@@ -21,7 +21,9 @@ public class E06JTabTest {
 	JTextField jtf1;
 	JTextArea jtarea;
 	
-	public void createFrame() {
+	public void createFrame() { //클래스 메서드를 통함 객체 생성
+		// 과정
+		// 객체 생성 > 각 component들을 구성
 		jfr1 = new JFrame("Jtab 테스트");
 		icon1 = new ImageIcon("./src/main/resources/images/bulback.jpg");
 		jlab = new JLabel(icon1);

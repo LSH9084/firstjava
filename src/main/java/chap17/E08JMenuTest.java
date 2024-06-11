@@ -17,6 +17,7 @@ public class E08JMenuTest {
 		JFrame fr1;
 		JMenuBar menuBar;
 		JMenu carMenu, memberMenu, rentMenu, helpMenu;
+		JMenuItem rentMenu41, rentMenu42, rentMenu43, rentMenu44;
 		JMenuItem carMenu11, carMenu12, carMenu13, carMenu14;
 		JMenuItem memMenu21, memMenu22, memMenu23, memMenu24;
 		JMenuItem helpMenu31;
@@ -27,7 +28,7 @@ public class E08JMenuTest {
 		JTextField txt;
 		JButton searchBtn;
 		
-		E08JMenuTest(){
+		E08JMenuTest(){ //클래스 내 생성자를 통한 객체 생성
 			fr1 = new JFrame("렌터카 예약 시스템");
 			menuBar = new JMenuBar();
 			
@@ -60,6 +61,11 @@ public class E08JMenuTest {
 			helpMenu.add(helpMenu31 = new JMenuItem("버전"));
 			
 			menuBar.add(rentMenu);
+			rentMenu.add(rentMenu41 = new JMenuItem("렌트 등록"));
+			rentMenu.add(rentMenu42 = new JMenuItem("렌트 조회"));
+			rentMenu.addSeparator();
+			rentMenu.add(rentMenu43 = new JMenuItem("렌트 수정"));
+			rentMenu.add(rentMenu44 = new JMenuItem("렌트 삭제"));
 			
 			panel = new JPanel();
 			label = new JLabel("차량명");

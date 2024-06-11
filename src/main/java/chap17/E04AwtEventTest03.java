@@ -11,7 +11,7 @@ import java.awt.event.WindowListener;
 
 import chap17.E02AwtEventTest.WindowHandler;
 
-public class E04AwtEventTest03 {
+public class E04AwtEventTest03 { //클래스 멤버변수를 통해서 전역변수를 주고 생성자를 통해서 객체 생성
 	private Frame frm1;
 	private Button btn1,btn2,btn3,btn4,btn5;
 	public E04AwtEventTest03(){
@@ -30,7 +30,9 @@ public class E04AwtEventTest03 {
 		
 	}
 	
-	public void startFrame() {
+	public void startFrame() { // interface나 class에서 implements나 extends를 통한 상속을 받고 있지 않기 때문에 객체 생성을 통해서 이벤트를 발생시키고 있다.
+		// 전의 문법과 다른 점은 전의 문법은 새로운 함수에서 ActionListener()를 implements하거나 adapter를 통해서 extends를 하여 사용해서 구현을 한번에 해줬지만
+		// 이번 파트에서는 추상메서드 상속을 통한 구현 과정을 이벤트 함수 인자값에서 직접 처리하고 있다.
 		btn1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

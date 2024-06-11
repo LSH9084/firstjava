@@ -7,13 +7,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
-public class E05JFrameTest {
+public class E05JFrameTest { //기본적인 사용법은 Frame과 거의 99프로 유사하나 연결이 더 유연한 Frame이다
 	
 	JFrame jfrm1 = new JFrame("JFrame 예제");
 	JButton btn1, btn2, btn3, btn4;
 	JTextField jtf1;
 	
-	public void createJFrame() {
+	public void createJFrame() { //클래스 네 메서드를 통함 객체 생성을 하고있다.
 		btn1 = new JButton("btn1");
 		btn2 = new JButton("btn2");
 		btn3 = new JButton("btn3");

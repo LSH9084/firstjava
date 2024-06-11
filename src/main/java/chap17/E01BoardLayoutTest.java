@@ -110,7 +110,7 @@ public class E01BoardLayoutTest {
 		frm4.addWindowListener(new WindowHandler());
 		frm4.add(panel, BorderLayout.CENTER);
 		frm4.setSize(400,400);
-		frm4.setVisible(false);
+		frm4.setVisible(true);
 		
 		
 		

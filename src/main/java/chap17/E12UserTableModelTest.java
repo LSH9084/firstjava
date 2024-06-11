@@ -40,7 +40,7 @@ public class E12UserTableModelTest extends JFrame {
 	}
 	
 	
-	private void initTableModelTest() {
+	private void initTableModelTest() { //생성자를 통해 메서드를 호출하고 메서드에서 객체 생성을 통해 컴포넌트 구성
 		//화면 요소 구성하기
 		searchPanel = new JPanel();
 		tCondition = new JTextField("10");

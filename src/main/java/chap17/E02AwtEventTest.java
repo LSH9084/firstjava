@@ -8,12 +8,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class E02AwtEventTest implements ActionListener {
+public class E02AwtEventTest implements ActionListener { // actionListener를 implements해서 이벤트 클래스를 상속받아 사용, 때문에 addActionListener메서를 사용할 때 객체 생성 대신 this를 사용가능
 	
 	private Frame frm1;
 	private Button btn1,btn2,btn3,btn4,btn5;
 	
-	public E02AwtEventTest() {
+	public E02AwtEventTest() { // 생성자를 통한 객체 생성
 		frm1 = new Frame("이벤트 핸들러 예제");
 		btn1 = new Button("btn1");
 		btn2 = new Button("btn2");
@@ -36,7 +36,7 @@ public class E02AwtEventTest implements ActionListener {
 		
 	}
 	
-	public void starFrame() {
+	public void starFrame() { // 클래스내 함수를 통한 컴포넌트 구성 이때 객체내의 생성자를 통해서 this를 사용
 		btn1.addActionListener(this);
 		btn2.addActionListener(this);
 		btn3.addActionListener(this);
@@ -75,7 +75,8 @@ public class E02AwtEventTest implements ActionListener {
 		}
 	}
 	
-	public static class WindowHandler extends WindowAdapter{
+	public static class WindowHandler extends WindowAdapter{ //implements를 통해서 interface에서 추상메서드를 상속받으면 필요없는 다른 모든 추상메서드까지 구현을 해줘야하는데
+		//이를 방지하기 위해서 Adapter라는 객체에서 extends를 통해서 상속받아 필요한 것만 사용
 		
 		@Override
 			public void windowClosing(WindowEvent e) {

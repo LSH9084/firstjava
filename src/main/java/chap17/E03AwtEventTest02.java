@@ -12,7 +12,7 @@ public class E03AwtEventTest02 {
 	private Frame frm1;
 	private Button btn1,btn2,btn3,btn4,btn5;
 	
-	public E03AwtEventTest02() {
+	public E03AwtEventTest02() { // 객체내 생성자를 통해서 컴포넌트 객체 생성
 		frm1 = new Frame("이벤트 핸들러 예제");
 		btn1 = new Button("btn1");
 		btn2 = new Button("btn2");
@@ -21,7 +21,7 @@ public class E03AwtEventTest02 {
 		btn5 = new Button("btn5");
 	}
 	
-	public void starFrame() {
+	public void starFrame() { //객체 생성 후 객체 내 메서드를 통해서 컴포넌트 구성, 구현
 		btn1.addActionListener(new InnerHandler());
 		btn2.addActionListener(new InnerHandler());
 		btn3.addActionListener(new InnerHandler());
@@ -39,7 +39,7 @@ public class E03AwtEventTest02 {
 		frm1.addWindowListener(new WindowHandler());
 	}
 	
-	public class InnerHandler implements ActionListener{
+	public class InnerHandler implements ActionListener{ //interface ActionListener를 통해서 구현
 
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == btn1) {
