@@ -2,19 +2,20 @@ package chap18;
 
 
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.List;
+import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import chap18.controller.E02MovieController;
-import chap18.model.E03MovieModel;
-
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.lang.ModuleLayer.Controller;
 
 public class E01MovieView extends JFrame implements ActionListener{
 	String resultMsg = null;
@@ -29,7 +30,7 @@ public class E01MovieView extends JFrame implements ActionListener{
 	public E01MovieView() {
 		//컴포넌트 객체 생성
 		super("영화 정보 관리 화면");
-		
+
 		tMovieTitle = new JTextField(30);
 		btnTitleInsert = new JButton("영화 제목 추가");
 		btnSave = new JButton("영화제목 파일 저장");
@@ -40,6 +41,7 @@ public class E01MovieView extends JFrame implements ActionListener{
 		
 		//컴포넌트 설정
 		movieList.setBackground(Color.green);
+
 		
 		Panel p = new Panel();
 		p.add(new JLabel("영화제목 입력"));
@@ -54,11 +56,11 @@ public class E01MovieView extends JFrame implements ActionListener{
 		setBounds(0,0,800,600);
 		setVisible(true);
 		setDefaultCloseOperation(super.EXIT_ON_CLOSE);
-		
+		btnExit.addActionListener(this);
 		movieList.addActionListener(this);
 		btnTitleInsert.addActionListener(this);
 		btnSave.addActionListener(this);
-		btnExit.addActionListener(this);
+		
 	}
 	
 	
@@ -76,14 +78,25 @@ public class E01MovieView extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		try {
 			String mTitle = e.getActionCommand();
-			System.out.println(mTitle);
 			if(e.getSource() == btnTitleInsert) {
-				controller.addTitle();
+				resultMsg ="영화제목을 추가했습니다.";
+				
+				//텍스트에 입력한 영화제목
+				mTitle =  tMovieTitle.getText().trim();
+				controller.addTitle(mTitle, movieList);
+				tMovieTitle.setText("");
+				
 			} else if (e.getSource() == btnSave) {
-				controller.saveTitle();
-			} else if(e.getSource() == movieList) {
-				controller.delTitle();
+				resultMsg = "영화 제목을 파일에 저장했습니다.";
+				controller.saveTitle(movieList);
+			} else  if(e.getSource() == movieList){
+				resultMsg = "영화제목을 삭제했습니다.";
+				controller.delTitle(mTitle, movieList);
 			}
+			if(e.getSource() == btnExit) {
+				System.exit(1); //정상 종료 (0): 비정상 종료
+			}
+			JOptionPane.showMessageDialog(this, resultMsg,"메시지박스",JOptionPane.INFORMATION_MESSAGE);
 			
 		} catch (Exception e2) {}
 	}
