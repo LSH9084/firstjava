@@ -15,4 +15,5 @@ public class MemberVo {
 	private String name;
 	private String address;
 	private String p_number;
+//	private static String checkId;
 }

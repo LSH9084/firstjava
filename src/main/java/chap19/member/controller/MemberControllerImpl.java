@@ -26,10 +26,12 @@ public class MemberControllerImpl implements MemberController{
 	}
 
 	@Override
-	public void regMember(MemberVo vo) {
+	public int regMember(MemberVo vo) {
+		int result = 0;
 		try {
-			memberDao.inserMember(vo);
+			result = memberDao.inserMember(vo);
 		} catch (Exception e) {}
+		return result;
 		
 	}
 
@@ -58,6 +60,16 @@ public class MemberControllerImpl implements MemberController{
 			// TODO: handle exception
 		}
 		
+	}
+	@Override
+	public MemberVo checkId(String memId) {
+		MemberVo vo = new MemberVo();
+		
+		try {
+			vo = memberDao.checkId(memId);
+		} catch (Exception e) {
+		}
+		return vo;
 	}
 	
 	

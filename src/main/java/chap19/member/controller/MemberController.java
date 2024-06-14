@@ -9,12 +9,14 @@ public interface MemberController {
 	// 회원 조회
 	public List<MemberVo> listMember(MemberVo vo);	
 	// 회원 등록
-	public void regMember(MemberVo vo);
+	public int regMember(MemberVo vo);
 	// 회원 수정
 	public void modMember(MemberVo vo);
 	// 회원 삭제
 	public void removeMember(MemberVo vo);
 	
 	public void close2();
+	
+	public MemberVo checkId(String memId);
 	
 }

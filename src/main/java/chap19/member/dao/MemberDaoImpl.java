@@ -12,13 +12,20 @@ public class MemberDaoImpl extends AbstractBaseDao implements MemberDao{
 	@Override
 	public List<MemberVo> selectMember(MemberVo vo) throws Exception {
 		List<MemberVo> list1 = new ArrayList<MemberVo>();
-		
-//		String _name = vo.getName();
-		
-		String sql ="select * from t_member";
-//		if(_name != null &&)
-		
-		pstmt = conn.prepareStatement(sql);
+		String sql = "";
+		String _name = vo.getName();
+		if ( _name != null && _name.length() != 0) {
+			sql = "SELECT * FROM t_member WHERE name = ? ORDER BY id";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, _name);
+			
+		} else {
+			sql = "select * from t_member";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+		}
 		rs = pstmt.executeQuery();
 		while(rs.next()) {
 			String id = rs.getString("id");
@@ -35,19 +42,17 @@ public class MemberDaoImpl extends AbstractBaseDao implements MemberDao{
 			vo2.setPs(ps);
 			
 			list1.add(vo2);
-			
-			//빌드를 이용한 생성자 한번 해보기
-//			vo2.builder()
-//			.Id(id)
-//			.build();
+
+
 		}
+		rs.close();
 		
 		return list1;
 	}
 
 	@Override
-	public void inserMember(MemberVo vo) throws Exception{
-
+	public int inserMember(MemberVo vo) throws Exception{
+			int result =0;
 			String sql2 = """
 					insert into t_member(id, ps, name, address, p_number)
 					values (?,?,?,?,?)
@@ -60,8 +65,8 @@ public class MemberDaoImpl extends AbstractBaseDao implements MemberDao{
 			pstmt.setString(4, vo.getAddress());
 			pstmt.setString(5, vo.getP_number());
 			
-			pstmt.executeUpdate();
-
+			result = pstmt.executeUpdate();
+			return result;
 	}
 
 	@Override
@@ -101,5 +106,37 @@ public class MemberDaoImpl extends AbstractBaseDao implements MemberDao{
 			rs.close();
 		}
 	}
+
+	@Override
+	public MemberVo checkId(String id) throws Exception {
+		int result = 0;
+		
+		MemberVo vo = new MemberVo();
+		
+		String _id = id;
+		String sql = "SELECT * FROM t_member WHERE memId = ?";
+			
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, _id);
+		
+		rs = pstmt.executeQuery();
+		
+		while(rs.next()) {
+			String memId 		= rs.getString("memId");
+			String memPassword 	= rs.getString("memPassword");
+			String memName 		= rs.getString("memName");
+			String memAddress 	= rs.getString("memAddress");
+			String memPhoneNum 	= rs.getString("memPhoneNum");
+			
+			vo.setId(memId);
+			vo.setName(memName);
+			vo.setPs(memPassword);
+			vo.setP_number(memPhoneNum);
+			vo.setAddress(memAddress);
+			
+		}
+		return vo;
+	}
+
 
 }
