@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Optional;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -35,7 +36,7 @@ public class RegCarDialog extends JDialog {
 		lcar_num = new JLabel("차량 번호");
 		lcar_name = new JLabel("차량 이름");
 		lcar_color = new JLabel("차량 색상");
-		lcar_size = new JLabel("차량 크기");
+		lcar_size = new JLabel("배기량");
 		lcar_made = new JLabel("제작사");
 		
 		tfcar_num = new JTextField(20);
@@ -56,18 +57,31 @@ public class RegCarDialog extends JDialog {
 				String car_made = tfcar_made.getText().trim();
 				
 				CarVo vo = new CarVo(car_num,car_name,car_color,car_size,car_made);
+				Optional<CarVo> checkIdVo = Optional.ofNullable(CarCon.checkId2(car_num));
 				
-				int result;
-				try {
-					result = CarCon.regCar(vo);
-					if(result>0) {
-						showMessage("새 차량을 등록했습니다.",result);
-					} else {
-						showMessage("차량 등록 실패",result);
-					}
-				} catch (Exception e1) {
-					e1.getMessage();
+				if (checkIdVo.get().getCar_num() != null) {
+					showMessage(checkIdVo.get().getCar_num(),-1);
+				} else {
+					try {
+						int result;
+						result = CarCon.regCar(vo);
+						if(result>0) {
+							showMessage("새 차량을 등록했습니다.",result);
+							tfcar_color.setText("");
+							tfcar_made.setText("");
+							tfcar_name.setText("");
+							tfcar_num.setText("");
+							tfcar_size.setText("");
+						} else {
+							showMessage("차량 등록 실패",result);
+						}
+						} catch (Exception e1) {
+							e1.getMessage();
+						}
 				}
+				
+				
+				
 				
 				
 			}

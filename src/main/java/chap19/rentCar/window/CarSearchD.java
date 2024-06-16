@@ -9,6 +9,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import chap19.common.RentTableModel;
+import chap19.member.controller.MemberController;
+import chap19.member.controller.MemberControllerImpl;
 import chap19.rentCar.controller.CarController;
 import chap19.rentCar.controller.CarControllerImpl;
 import chap19.rentCar.vo.CarVo;
@@ -32,19 +34,24 @@ public class CarSearchD extends JDialog{
 		this.iii = str2;
 		System.out.println(iii);
 		
-		init i = new init();
-		init2();
+//		init();
+		carTable = new JTable();
+		
+		rm = new RentTableModel(carItems, columnNames);
+		carTable.setModel(rm);
+		init2 ini = new init2();
 	}
 	
 
-	class init{
+	public class init2{
 		String car_num = null;
 		String car_name = null;
 		String car_color = null;
 		int car_size = 0;
 		String car_made = null;
+		CarController carcon = new CarControllerImpl();
 		
-		CarVo co1 = CarVo.builder()
+		CarVo vo1 = CarVo.builder()
 				.car_num(car_num)
 				.car_name(car_name)
 				.car_color(car_color)
@@ -54,15 +61,24 @@ public class CarSearchD extends JDialog{
 		
 		List<CarVo> carList = null;
 		
-		public init() {
-			
-			carList = new ArrayList<CarVo>();
+		
+		public init2() {
 			CarVo vo2 = new CarVo();
+			String name = iii;
+			if(name !=null && name.length() !=0) {
+				vo2.setCar_name(name);
+				carList = carcon.listCar(vo2);
 			
-			
+				if(carList != null && carList.size() !=0) {
+					loadTableData(carList);
+				}
+			} else {
+				carList = carcon.listCar(vo2);
+				loadTableData(carList);
+			}
 			
 			}
-		}
+		
 		public void loadTableData (List<CarVo> carList) {
 			if(carList!=null && carList.size()!=0) {
 				List<CarVo> list1 = new ArrayList<CarVo>();
@@ -78,25 +94,30 @@ public class CarSearchD extends JDialog{
 				
 				rm = new RentTableModel(carItems, columnNames);
 				carTable.setModel(rm);
+				init();
 			} else {
 //				message("조회한 정보가 없습니다.");
 				carItems = new Object[0][5];
 				rm = new RentTableModel(carItems, columnNames);
 				carTable.setModel(rm);
+				init();
 			}
+		}
 		}
 	
 	
-	private void init2() {
-		carTable = new JTable();
+	
+	
+	private void init() {
 		
-		rm = new RentTableModel(carItems, columnNames);
 		add(new JScrollPane(carTable),BorderLayout.CENTER);
 		
 		setLocation(300,100);
 		setSize(800,600);
 		setModal(true); //항상 부모 창 위에 표시
 		setVisible(true);
+		
+//		init2 ini = new init2();
 		
 	}
 	

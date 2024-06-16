@@ -35,11 +35,21 @@ import chap19.member.window.UpdateMemDialog;
 import chap19.rentCar.controller.CarController;
 import chap19.rentCar.controller.CarControllerImpl;
 import chap19.rentCar.vo.CarVo;
+import chap19.rentCar.window.CarSearchColor;
 import chap19.rentCar.window.CarSearchD;
+import chap19.rentCar.window.CarSearchMade;
+import chap19.rentCar.window.CarSearchNum;
 import chap19.rentCar.window.ModCarDialog;
 import chap19.rentCar.window.RegCarDialog;
 import chap19.rentCar.window.RemoveCarDialog;
 import chap19.rentCar.window.SearchCarDialog;
+import chap19.res.controller.ResController;
+import chap19.res.controller.ResControllerImpl;
+import chap19.res.dao.ResDaoImpl;
+import chap19.res.window.ResModDialog;
+import chap19.res.window.ResRegDialog;
+import chap19.res.window.ResRemoveDialog;
+import chap19.res.window.ResSearchiDialog;
 
 public class RentMainWindow extends AbstactBaseWindow {
 	JFrame frm;
@@ -57,6 +67,7 @@ public class RentMainWindow extends AbstactBaseWindow {
 	JComboBox comboBox; //검색 조건 설정
 	CarController carControll = new CarControllerImpl();
 	MemberController memControll = new MemberControllerImpl();
+	ResController resControll = new ResControllerImpl();
 //	JTable carTable;
 //	String[] columnNames = {
 //			"차량 번호",
@@ -156,6 +167,10 @@ public RentMainWindow() {
 		carMenu13.addActionListener(new MemberHandler());
 		carMenu12.addActionListener(new MemberHandler());
 		btnSearch.addActionListener(new MemberHandler());
+		resMenu31.addActionListener(new MemberHandler());
+		resMenu33.addActionListener(new MemberHandler());
+		resMenu34.addActionListener(new MemberHandler());
+		resMenu32.addActionListener(new MemberHandler());
 	}
 	
 	public static void main(String[] args) {
@@ -186,7 +201,25 @@ public RentMainWindow() {
 					new SearchCarDialog(carControll, "조회창");
 				} else if(e.getSource()==btnSearch && comboBox.getSelectedItem().equals("차량이름") ) {
 					String iii = tf.getText().trim();
-					new CarSearchD(carControll, "조회",iii);
+					new CarSearchD(carControll, "car_name조회",iii);
+					
+				} else if(e.getSource()==btnSearch && comboBox.getSelectedItem().equals("차량번호")) {
+					String iii = tf.getText().trim();
+					new CarSearchNum(carControll, "car_num조회", iii);
+				} else if(e.getSource()==btnSearch && comboBox.getSelectedItem().equals("차량색상")) {
+					String iii = tf.getText().trim();
+					new CarSearchColor(carControll, "car_color조회", iii);
+				} else if(e.getSource()==btnSearch && comboBox.getSelectedItem().equals("제조사")) {
+					String iii = tf.getText().trim();
+					new CarSearchMade(carControll, "car_color조회", iii);
+				} else if(e.getSource()== resMenu31) {
+					new ResRegDialog(resControll, "렌트등록");
+				} else if(e.getSource()== resMenu33) {
+					new ResModDialog(resControll, "렌트수정");
+				} else if(e.getSource()==resMenu34) {
+					new ResRemoveDialog(resControll, "렌트삭제");
+				} else if(e.getSource()==resMenu32) {
+					new ResSearchiDialog(resControll, "렌트조회");
 				}
 			} catch (Exception e2) {}
 		}

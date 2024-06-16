@@ -21,6 +21,14 @@ public class ResVo {
 	private LocalDate rent_end;
 	private String rent_car_num;
 	private String rent_id;
-	private MemberVo memVo;
-	private CarVo carVo;
+//	private MemberVo memVo;
+//	private CarVo carVo;
+	
+	
+	public ResVo (String a, LocalDate b, LocalDate c) {
+		this.rent_num = a;
+		this.rent_start = b;
+		this.rent_end = c;
+	}
+
 }

@@ -2,6 +2,7 @@ package chap19.rentCar.controller;
 
 import java.util.List;
 
+import chap19.member.vo.MemberVo;
 import chap19.rentCar.vo.CarVo;
 
 public interface CarController {
@@ -15,4 +16,11 @@ public interface CarController {
 	
 	public void close();
 	
+	public List<CarVo> listCarColor(CarVo vo) throws Exception;
+	
+	public List<CarVo> listCarMade(CarVo vo) throws Exception;
+	
+	public List<CarVo> listCarNum(CarVo vo) throws Exception;
+	
+	public CarVo checkId2(String carnum);
 }

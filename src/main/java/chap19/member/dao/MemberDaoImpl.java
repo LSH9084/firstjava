@@ -114,7 +114,7 @@ public class MemberDaoImpl extends AbstractBaseDao implements MemberDao{
 		MemberVo vo = new MemberVo();
 		
 		String _id = id;
-		String sql = "SELECT * FROM t_member WHERE memId = ?";
+		String sql = "SELECT * FROM t_member WHERE Id = ?";
 			
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, _id);
@@ -122,17 +122,17 @@ public class MemberDaoImpl extends AbstractBaseDao implements MemberDao{
 		rs = pstmt.executeQuery();
 		
 		while(rs.next()) {
-			String memId 		= rs.getString("memId");
-			String memPassword 	= rs.getString("memPassword");
-			String memName 		= rs.getString("memName");
-			String memAddress 	= rs.getString("memAddress");
-			String memPhoneNum 	= rs.getString("memPhoneNum");
+			String Id 		= rs.getString("Id");
+			String Password 	= rs.getString("Password");
+			String Name 		= rs.getString("Name");
+			String Address 	= rs.getString("Address");
+			String P_Number 	= rs.getString("PhoneNum");
 			
-			vo.setId(memId);
-			vo.setName(memName);
-			vo.setPs(memPassword);
-			vo.setP_number(memPhoneNum);
-			vo.setAddress(memAddress);
+			vo.setId(Id);
+			vo.setName(Password);
+			vo.setPs(Name);
+			vo.setP_number(Address);
+			vo.setAddress(P_Number);
 			
 		}
 		return vo;

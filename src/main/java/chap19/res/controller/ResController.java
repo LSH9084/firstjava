@@ -5,11 +5,13 @@ import java.util.List;
 import chap19.res.vo.ResVo;
 
 public interface ResController {
-	public List<ResVo> searchRes();
+	public List<ResVo> searchRes(ResVo vo);
 	
-	public void regRes();
+	public int regRes(ResVo vo);
 	
-	public void modRes();
+	public void modRes(ResVo vo);
 	
-	public void remRes();
+	public void remRes(ResVo vo);
+	
+	public ResVo checkId3(String rentNum);
 }

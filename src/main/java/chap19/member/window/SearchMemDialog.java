@@ -119,7 +119,7 @@ public class SearchMemDialog extends JDialog{
 	
 	private void loadTableData (List<MemberVo> memList) {
 		if(memList!=null && memList.size()!=0) {
-			List<MemberVo> list1 = new ArrayList<MemberVo>();
+//			List<MemberVo> list1 = new ArrayList<MemberVo>();
 			memItems = new String [memList.size()][5]; //리스트의 개수만큼 행을 설정
 			for (int i =0; i<memList.size(); i++) {
 				MemberVo memVo = memList.get(i);
