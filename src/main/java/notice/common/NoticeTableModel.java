@@ -7,9 +7,10 @@ public class NoticeTableModel extends AbstractTableModel {
 		String [] columnNames ;
 		boolean [] columnEditables ;
 		
-		public NoticeTableModel(Object [][] data ,String []column) {
+		public NoticeTableModel(Object [][] data ,String []column, boolean [] k) {
 			this.memItems = data;
 			this.columnNames = column;
+			this.columnEditables =k;
 		}
 		
 

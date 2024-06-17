@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import notice.common.base.AbstractBaseDao;
+import notice.posts.controller.PostsController;
+import notice.posts.controller.PostsControllerImpl;
 import notice.posts.vo.PostsVo;
+import notice.posts.window.PostsClickDialog;
 
 public class PostsDaoImpl extends AbstractBaseDao implements PostsDao {
-
+//	PostsController postsController = new PostsControllerImpl();
 	@Override
 	public void DeletePosts2(PostsVo vo) throws Exception {
 		String sql = "delete from posts where post_id = ?";
@@ -59,44 +62,7 @@ public class PostsDaoImpl extends AbstractBaseDao implements PostsDao {
 		pstmt.executeUpdate();
 	}
 
-	@Override
-//	public List<PostsVo> postsList2(PostsVo vo) throws Exception {
-//		
-////		LocalDate created_posts1 = vo.getCreated_posts();
-////		LocalDate updated_posts1 = vo.getUpdated_posts();
-////		java.sql.Date created_posts2 = java.sql.Date.valueOf(created_posts1);
-////		java.sql.Date updated_posts2 = java.sql.Date.valueOf(updated_posts1);
-//		String sql = "select * from posts";
-//		List<PostsVo> list1 = new ArrayList<PostsVo>();
-//		pstmt = conn.prepareStatement(sql);
-//		rs = pstmt.executeQuery();
-//		
-//		while(rs.next()) {
-//			int post_id = rs.getInt("post_id");
-//			String title = rs.getString("title");
-//			String content = rs.getString("content");
-//			String author = rs.getString("author");
-//			LocalDate created_posts = rs.getDate("created_posts").toLocalDate();
-//			LocalDate updated_posts = rs.getDate("updated_posts").toLocalDate();
-//			
-//			PostsVo vo2 = PostsVo.builder()
-//					.post_id(post_id)
-//					.title(title)
-//					.content(content)
-//					.author(author)
-//					.created_posts(created_posts)
-//					.updated_posts(updated_posts)
-//					.build();
-//			
-//			list1.add(vo2);
-//			
-//			
-//		}
-//		rs.close();
-//		
-//		
-//		return list1;
-//	}
+
 	public List<PostsVo> postsList2(PostsVo vo) throws Exception {
 	    String sql = "select * from posts";
 	    List<PostsVo> list1 = new ArrayList<PostsVo>();
@@ -126,4 +92,43 @@ public class PostsDaoImpl extends AbstractBaseDao implements PostsDao {
 	    
 	    return list1;
 	}
+	
+	@Override
+	public List<PostsVo> ClickPosts2(PostsVo vo) throws Exception {
+		List<PostsVo> list1 = new ArrayList<>();
+		int result =0;
+		String sql = "select * from posts where post_id = ?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, vo.getPost_id());
+		rs = pstmt.executeQuery();
+		
+		while(rs.next()) {
+			int post_id = rs.getInt("post_id"); // 수정된 변수 이름
+	        String title = rs.getString("title");
+	        String content = rs.getString("content");
+	        String author = rs.getString("author");
+	        LocalDate created_posts = rs.getDate("created_posts").toLocalDate();
+	        LocalDate updated_posts = rs.getDate("updated_posts").toLocalDate();
+	        
+	        PostsVo vo2 = PostsVo.builder()
+	                .post_id(post_id) // 수정된 필드 이름
+	                .title(title)
+	                .content(content)
+	                .author(author)
+	                .created_posts(created_posts)
+	                .updated_posts(updated_posts)
+	                .build();
+	        
+	        list1.add(vo2);
+		}
+		rs.close();
+		
+		list1.forEach(System.out::println);
+		
+		return list1;
+		
+		
+		
+	}
+
 }

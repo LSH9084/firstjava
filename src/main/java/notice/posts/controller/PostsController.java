@@ -13,4 +13,6 @@ public interface PostsController {
 	public void RegisterPosts(PostsVo vo);
 	
 	public List<PostsVo> postsList(PostsVo vo);
+	
+	public List<PostsVo> ClickPosts(PostsVo vo);
 }

@@ -47,5 +47,13 @@ public class PostsControllerImpl implements PostsController{
 		}
 		return list1;
 	}
+	
+	public List<PostsVo> ClickPosts(PostsVo vo) {
+		List<PostsVo> list1 = new ArrayList<>();
+		try {
+		list1 =postsController.ClickPosts2(vo);
+		} catch (Exception e) {}
+		return list1;
+	}
 
 }

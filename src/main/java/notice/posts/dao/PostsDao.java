@@ -12,4 +12,7 @@ public interface PostsDao {
 	public void RegisterPosts2(PostsVo vo) throws Exception;
 	
 	public List<PostsVo> postsList2(PostsVo vo) throws Exception;
+	
+	public List<PostsVo> ClickPosts2(PostsVo vo) throws Exception;
+	
 }

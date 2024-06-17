@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 public class AbstractBaseDao {
 	protected static final String driver = "org.mariadb.jdbc.Driver";
 	protected static final String url = "jdbc:mariadb://localhost:3306/noticedb";
-	protected static final String user = "java";
+	protected static final String user = "root";
 	protected static final String pwd = "1234";
 	
 	static protected Connection conn = null;
