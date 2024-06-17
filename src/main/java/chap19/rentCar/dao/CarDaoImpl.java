@@ -64,6 +64,7 @@ public class CarDaoImpl extends AbstractBaseDao implements CarDao {
 //		String _carSize = String.valueOf(vo.getCar_size());
 //		String _carMade = vo.getCar_made();
 		
+		
 		if(_carNum !=null && _carNum.length() !=0) {
 			sql = "SELECT * FROM t_car WHERE car_num = ? ORDER BY car_num";
 			pstmt = conn.prepareStatement(sql);

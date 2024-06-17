@@ -171,6 +171,7 @@ public RentMainWindow() {
 		resMenu33.addActionListener(new MemberHandler());
 		resMenu34.addActionListener(new MemberHandler());
 		resMenu32.addActionListener(new MemberHandler());
+		helpMenu41.addActionListener(new MemberHandler());
 	}
 	
 	public static void main(String[] args) {
@@ -205,6 +206,8 @@ public RentMainWindow() {
 					
 				} else if(e.getSource()==btnSearch && comboBox.getSelectedItem().equals("차량번호")) {
 					String iii = tf.getText().trim();
+					String com = comboBox.getSelectedItem().toString();
+					System.out.println(com);
 					new CarSearchNum(carControll, "car_num조회", iii);
 				} else if(e.getSource()==btnSearch && comboBox.getSelectedItem().equals("차량색상")) {
 					String iii = tf.getText().trim();
@@ -220,7 +223,10 @@ public RentMainWindow() {
 					new ResRemoveDialog(resControll, "렌트삭제");
 				} else if(e.getSource()==resMenu32) {
 					new ResSearchiDialog(resControll, "렌트조회");
+				} else if(e.getSource()==helpMenu41) {
+					System.out.println("도움말 창은 만들기가 너무 귀찮아서 패스함");
 				}
+				
 			} catch (Exception e2) {}
 		}
 	}

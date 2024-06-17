@@ -16,18 +16,20 @@ public class ResDaoImpl extends AbstractBaseDao implements ResDao {
 
 	@Override
 	public List<ResVo> searchRes2(ResVo vo) throws Exception {
-		String sql = "select * from t_res where rent_start >= ? and rent_end <= ?";
+		String sql = "select * from t_res where rent_end <= ? or rent_start >= ?";
 		List<ResVo> list2 = new ArrayList<ResVo>();
 		LocalDate start1 = vo.getRent_start();
 		LocalDate end1 = vo.getRent_end();
 		
-		Date start2 = Date.valueOf(vo.getRent_start());
-		Date end2 = Date.valueOf(vo.getRent_end());
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setDate(1, end2);
-		pstmt.setDate(2, start2);
-		rs = pstmt.executeQuery();
+		java.sql.Date start2 = Date.valueOf(vo.getRent_start());
+		java.sql.Date end2 = Date.valueOf(vo.getRent_end());
 		
+		System.out.println(start2+"start2");
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setDate(1, start2);
+		pstmt.setDate(2, end2);
+		rs = pstmt.executeQuery();
+		System.out.println("rs: "+rs);
 		while(rs.next()) {
 			String rent_num = rs.getString("rent_num");
 			LocalDate rent_day = rs.getDate("rent_day").toLocalDate();
@@ -35,6 +37,8 @@ public class ResDaoImpl extends AbstractBaseDao implements ResDao {
 			LocalDate rent_end = rs.getDate("rent_end").toLocalDate();
 			String rent_car_num = rs.getString("rent_car_num");
 			String rent_id = rs.getString("rent_id");
+			
+			System.out.println(rent_start+"====");
 
 			
 			ResVo vo2 = ResVo.builder()
@@ -44,11 +48,10 @@ public class ResDaoImpl extends AbstractBaseDao implements ResDao {
 					.rent_end(rent_end)
 					.rent_car_num(rent_car_num)
 					.rent_id(rent_id)
-//					.memVo(memVo)
-//					.carVo(carVo)
 					.build();
 			
 			list2.add(vo2);
+			list2.stream().forEach(System.out::println);
 		}
 		rs.close();
 		
@@ -156,45 +159,6 @@ public class ResDaoImpl extends AbstractBaseDao implements ResDao {
 	}
 	
 	
-	
-//	private MemberVo getMemberById(String rent_id) throws Exception {
-//  String sql = "SELECT * FROM t_member WHERE id = ?";
-//  PreparedStatement pstmt = conn.prepareStatement(sql);
-//  pstmt.setString(1, rent_id);
-//  ResultSet rs = pstmt.executeQuery();
-//  MemberVo memVo = null;
-//  if (rs.next()) {
-//      memVo = new MemberVo();
-//      memVo.setId(rs.getString("id"));
-//      memVo.setName(rs.getString("name"));
-//      memVo.setAddress(rs.getString("address"));
-//      memVo.setP_number(rs.getString("p_number"));
-//      memVo.setPs(rs.getString("ps"));
-//  }
-//  rs.close();
-//  pstmt.close();
-//  return memVo;
-//}
 
-//private CarVo getCarByNum(String rent_car_num) throws Exception {
-//  String sql = "SELECT * FROM t_car WHERE car_num = ?";
-//  PreparedStatement pstmt = conn.prepareStatement(sql);
-//  pstmt.setString(1, rent_car_num);
-//  ResultSet rs = pstmt.executeQuery();
-//  CarVo carVo = null;
-//  if (rs.next()) {
-//      carVo = CarVo.builder()
-//              .car_num(rs.getString("car_num"))
-//              .car_name(rs.getString("car_name"))
-//              .car_color(rs.getString("car_color"))
-//              .car_size(rs.getInt("car_size"))
-//              .car_made(rs.getString("car_made"))
-//              .build();
-//  }
-//  rs.close();
-//  pstmt.close();
-//  return carVo;
-//}
-	
 	
 }

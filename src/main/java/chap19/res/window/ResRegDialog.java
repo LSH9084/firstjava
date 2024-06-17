@@ -45,7 +45,7 @@ public class ResRegDialog extends JDialog{
 	
 	private void init() {
 		lnum = new JLabel("렌트번호");
-		lday = new JLabel("ㅇㅇ");
+		lday = new JLabel("예약날짜");
 		lstart = new JLabel("시작일");
 		lend = new JLabel("반납일");
 		lcar_num = new JLabel("차량번호");
@@ -74,6 +74,7 @@ public class ResRegDialog extends JDialog{
 				Instant instant2 = date2.toInstant();
 				java.util.Date date3 = (java.util.Date) tfend2.getValue();
 				Instant instant3 = date3.toInstant();
+				
 
 				
 //				String dateString = tfday.getText().trim();
