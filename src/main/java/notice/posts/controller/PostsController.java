@@ -15,4 +15,6 @@ public interface PostsController {
 	public List<PostsVo> postsList(PostsVo vo);
 	
 	public List<PostsVo> ClickPosts(PostsVo vo);
+	
+	public List<PostsVo> searchList(PostsVo vo, String str, String inner);
 }

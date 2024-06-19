@@ -49,9 +49,18 @@ public class PostsControllerImpl implements PostsController{
 	}
 	
 	public List<PostsVo> ClickPosts(PostsVo vo) {
-		List<PostsVo> list1 = new ArrayList<>();
+		List<PostsVo> list1 = new ArrayList<PostsVo>();
 		try {
 		list1 =postsController.ClickPosts2(vo);
+		} catch (Exception e) {}
+		return list1;
+	}
+
+	@Override
+	public List<PostsVo> searchList(PostsVo vo, String str, String inner) {
+		List<PostsVo> list1 = new ArrayList<PostsVo>();
+		try {
+		list1 =postsController.searchList2(vo,str,inner);
 		} catch (Exception e) {}
 		return list1;
 	}

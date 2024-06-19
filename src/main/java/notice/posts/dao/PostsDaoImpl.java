@@ -23,48 +23,38 @@ public class PostsDaoImpl extends AbstractBaseDao implements PostsDao {
 
 	@Override
 	public void ModifyPosts2(PostsVo vo) throws Exception {
-		String sql = "update posts set title = ?, content = ?, author = ?, created_posts =?, updated_posts =? where post_id = ? ";
+		String sql ="UPDATE posts SET title = ?, content = ?, author = ?, updated_posts = CURRENT_TIMESTAMP WHERE post_id = ?";
 		pstmt = conn.prepareStatement(sql);
-		LocalDate created_posts1 = vo.getCreated_posts();
-		LocalDate updated_posts1 = vo.getUpdated_posts();
-		java.sql.Date created_posts2 = java.sql.Date.valueOf(created_posts1);
-		java.sql.Date updated_posts2 = java.sql.Date.valueOf(updated_posts1);
 		
 		pstmt.setString(1, vo.getTitle());
 		pstmt.setString(2, vo.getContent());
 		pstmt.setString(3, vo.getAuthor());
-		pstmt.setDate(4, created_posts2);
-		pstmt.setDate(5, updated_posts2);
-		pstmt.setInt(6, vo.getPost_id());
+		pstmt.setInt(4, vo.getPost_id());
 		
 		pstmt.executeUpdate();
 	}
 
 	@Override
 	public void RegisterPosts2(PostsVo vo) throws Exception {
-		String sql = """
-					insert into posts (post_id, title, content, author, created_posts, updated_posts)
-					values (?,?,?,?,?,?)
-				""";
-		pstmt = conn.prepareStatement(sql);
-		LocalDate created_posts1 = vo.getCreated_posts();
-		LocalDate updated_posts1 = vo.getUpdated_posts();
-		java.sql.Date created_posts2 = java.sql.Date.valueOf(created_posts1);
-		java.sql.Date updated_posts2 = java.sql.Date.valueOf(updated_posts1);
+
 		
-		pstmt.setInt(1, vo.getPost_id());
-		pstmt.setString(2, vo.getTitle());
+		String sql = """
+				insert into posts (title, content, author)
+				values (?,?,?)
+			""";
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setString(1, vo.getTitle());
+		pstmt.setString(2, vo.getAuthor());
 		pstmt.setString(3, vo.getContent());
-		pstmt.setString(4, vo.getAuthor());
-		pstmt.setDate(5, created_posts2);
-		pstmt.setDate(6, updated_posts2);
+
 		
 		pstmt.executeUpdate();
 	}
 
 
 	public List<PostsVo> postsList2(PostsVo vo) throws Exception {
-	    String sql = "select * from posts";
+	    String sql = "select * from posts  order by created_posts desc";
 	    List<PostsVo> list1 = new ArrayList<PostsVo>();
 	    pstmt = conn.prepareStatement(sql);
 	    rs = pstmt.executeQuery();
@@ -96,7 +86,7 @@ public class PostsDaoImpl extends AbstractBaseDao implements PostsDao {
 	@Override
 	public List<PostsVo> ClickPosts2(PostsVo vo) throws Exception {
 		List<PostsVo> list1 = new ArrayList<>();
-		int result =0;
+//		int result =0;
 		String sql = "select * from posts where post_id = ?";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, vo.getPost_id());
@@ -129,6 +119,50 @@ public class PostsDaoImpl extends AbstractBaseDao implements PostsDao {
 		
 		
 		
+	}
+
+	@Override
+	public List<PostsVo> searchList2(PostsVo vo, String str, String inner) throws Exception {
+		List<PostsVo> list1 = new ArrayList<PostsVo>();
+		String sql;
+		if(str.equals("제목")) {
+			sql = "select * from posts where title like ? order by created_posts desc";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + inner + "%");
+			rs = pstmt.executeQuery();
+		} else if (str.equals("작성자")) {
+			sql = "select * from posts where author like ? order by created_posts desc";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + inner + "%");
+			rs = pstmt.executeQuery();
+		}
+
+		
+		while(rs.next()) {
+			int post_id = rs.getInt("post_id"); // 수정된 변수 이름
+	        String title = rs.getString("title");
+	        String content = rs.getString("content");
+	        String author = rs.getString("author");
+	        LocalDate created_posts = rs.getDate("created_posts").toLocalDate();
+	        LocalDate updated_posts = rs.getDate("updated_posts").toLocalDate();
+	        
+	        PostsVo vo2 = PostsVo.builder()
+	                .post_id(post_id) // 수정된 필드 이름
+	                .title(title)
+	                .content(content)
+	                .author(author)
+	                .created_posts(created_posts)
+	                .updated_posts(updated_posts)
+	                .build();
+	        
+	        list1.add(vo2);
+		}
+		rs.close();
+		list1.forEach(v->{
+			System.out.println(v);
+		});
+		
+		return list1;
 	}
 
 }

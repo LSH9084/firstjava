@@ -1,5 +1,7 @@
 package notice.common;
 
+import java.util.Arrays;
+
 import javax.swing.table.AbstractTableModel;
 
 public class NoticeTableModel extends AbstractTableModel {
@@ -11,6 +13,14 @@ public class NoticeTableModel extends AbstractTableModel {
 			this.memItems = data;
 			this.columnNames = column;
 			this.columnEditables =k;
+		}
+		public void setData(Object[][] data) {
+		System.out.println("=======");
+        this.memItems = data;
+        System.out.println("Table model updated with data: " + Arrays.deepToString(memItems)); // 디버깅 출력
+        fireTableDataChanged();
+        System.out.println("==ddf==");
+        
 		}
 		
 

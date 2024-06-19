@@ -11,7 +11,9 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -29,14 +31,16 @@ import notice.posts.controller.PostsController;
 import notice.posts.controller.PostsControllerImpl;
 import notice.posts.vo.PostsVo;
 import notice.posts.window.PostsClickDialog;
+import notice.posts.window.PostsRegistDialog;
 
 
 public class MainNotice extends AbstractBaseWindow {
-	JButton btnNext, btnPrev, btnSearch;
+	JButton btnNext, btnPrev, btnSearch, btnCreate;
 	JLabel lSearch;
 	JTextField tfSearch;
 	JTable table;
-	JPanel panelSearch, panelBtn;
+	JPanel panelSearch, panelBtn, panelCreate;
+	JComboBox combobox;
 	Object [][] postsItems = new String[0][5];
 	String [] columnNames = {
 			"post_id","title","author","created_posts","updated_posts"
@@ -58,11 +62,17 @@ public class MainNotice extends AbstractBaseWindow {
 		btnNext = new JButton("다음목록");
 		btnPrev = new JButton("이전목록");
 		btnSearch = new JButton("검색");
+		btnCreate = new JButton("글쓰기");
 		
+		btnCreate.addActionListener(new MemberHandler());
 		
+		combobox = new JComboBox();
+		combobox.addItem("제목");
+		combobox.addItem("작성자");
 		
 		panelSearch = new JPanel(new GridLayout(1,3));
 		panelBtn = new JPanel(new GridLayout(1,3));
+		panelCreate = new JPanel(new GridLayout(2,1));
 		
 		lSearch = new JLabel("검색 : ");
 		tfSearch = new JTextField(30);
@@ -81,13 +91,17 @@ public class MainNotice extends AbstractBaseWindow {
 		
 		
 		panelSearch.add(lSearch);
+		panelSearch.add(combobox);
 		panelSearch.add(tfSearch);
 		panelSearch.add(btnSearch);
 		
 		panelBtn.add(btnPrev);
 		panelBtn.add(btnNext);
 		
-		add(panelSearch,BorderLayout.NORTH);
+		panelCreate.add(panelSearch,BorderLayout.NORTH);
+		panelCreate.add(btnCreate,BorderLayout.EAST);
+		
+		add(panelCreate,BorderLayout.NORTH);
 		add(new JScrollPane(table),BorderLayout.CENTER);
 		add(panelBtn,BorderLayout.SOUTH);
 		
@@ -96,6 +110,8 @@ public class MainNotice extends AbstractBaseWindow {
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
+		
+		btnSearch.addActionListener(new PostHandler());
 		
 		ListSelectionModel rowSel = table.getSelectionModel();
 		rowSel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -109,6 +125,34 @@ public class MainNotice extends AbstractBaseWindow {
 		
 		
 		
+		
+	}
+	
+	class PostHandler implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			List<PostsVo> searchResults = null;
+			String str = (String)combobox.getSelectedItem();
+			if(str=="제목") {
+				String inner = tfSearch.getText().trim();
+				PostsVo vo = PostsVo.builder()
+						.title(inner)
+						.build();
+				searchResults = postsController.searchList(vo, str ,inner );
+			} else if (str =="작성자") {
+				String inner = tfSearch.getText().trim();
+				PostsVo vo = PostsVo.builder()
+						.author(inner)
+						.build();
+				searchResults = postsController.searchList(vo, str,inner);
+			}
+			 if (searchResults != null) {
+	                PostsloadTable(searchResults);
+	            } else {
+	                message("검색 결과가 없습니다.");
+	            }
+			
+		}
 		
 	}
 	
@@ -202,6 +246,21 @@ public class MainNotice extends AbstractBaseWindow {
 				System.out.println((row+1)+"행"+(col+1)+"열이 선택됨...");
 			}
 		}
+	}
+	
+	class MemberHandler implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource()==btnCreate) {
+				new PostsRegistDialog(postsController, "글쓰기");
+			}
+			
+		}
+		
+	}
+	public void message(String str) {
+		JOptionPane.showMessageDialog(this, str, "알림창",JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 }
