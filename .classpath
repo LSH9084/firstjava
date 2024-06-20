@@ -49,5 +49,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lombok.jar"/>
+	<classpathentry kind="lib" path="C:/javaStudyLsh/java/java/ext/my_db_lib.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
